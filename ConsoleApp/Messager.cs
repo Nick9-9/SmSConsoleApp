@@ -8,19 +8,21 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp
 {
-    class Mesasage
+    class Messager
     {
         [Key]
-        public int Id { get; set; }
-        public int IdSender { get; set; }
-        public int RecepientPhone { get; set; }
-        public DateTime Data { get; set; }
-        public string TextMessage { get; set; }
+        public int MessagerID { get; set; }
+        public DateTime Date { get; set; }
         public DateTime Time { get; set; }
+        public string TextMessage { get; set; }
+        public int RecepientId { get; set; }
+        public int UserId { get; set; }
 
-        [ForeignKey("IdSender")]
+
+
+        [ForeignKey("UserId")]
         public User Sender { get; set; }
-        [ForeignKey("RecepientPhone")]
+        [ForeignKey("RecepientId")]
         public Recepient Recepient { get; set; }
     }
 }

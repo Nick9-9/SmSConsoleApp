@@ -11,10 +11,10 @@ namespace ConsoleApp
     {
         public UserContext()
             : base("DbConnection")
-        { }
+    { }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Mesasage>Mesasages{get; set;}
-        public DbSet<Recepient> Recepients { get; set; }
-    }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Messager> Messagers { get; set; }
+    public DbSet<Recepient> Recepients { get; set; }
+}
 }
