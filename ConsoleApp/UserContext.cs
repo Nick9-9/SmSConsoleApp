@@ -13,8 +13,8 @@ namespace ConsoleApp
             : base("DbConnection")
     { }
 
-    public DbSet<User> Users { get; set; }
-    public DbSet<Messager> Messagers { get; set; }
-    public DbSet<Recepient> Recepients { get; set; }
+    public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<Messager> Messagers { get; set; }
+    public virtual  DbSet<Recepient> Recepients { get; set; }
 }
 }

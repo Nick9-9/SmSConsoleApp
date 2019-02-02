@@ -10,7 +10,7 @@ namespace ConsoleApp.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            ContextKey = "ConsoleApp.UserContext";
+
         }
 
         protected override void Seed(ConsoleApp.UserContext context)
