@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ConsoleApp
 {
@@ -17,6 +18,7 @@ namespace ConsoleApp
             Curentuser = new User();
             do
             {
+                Console.Clear();
                 Console.Write("Name: ");
                 Curentuser.Name = Console.ReadLine();
             } while (Curentuser.Name == null);
@@ -40,11 +42,14 @@ namespace ConsoleApp
             {
                 Console.WriteLine("Password: ");
                 Curentuser.Password = Console.ReadLine();
+
             } while (Curentuser.Password == null);
 
             userContext.Users.Add(Curentuser);
             userContext.SaveChanges();
             Console.WriteLine("Plus new user!!!");
+            Console.Clear();
+            InterfaceMessagge();
             Console.ReadKey();
         }
 
@@ -52,8 +57,10 @@ namespace ConsoleApp
         {
             string phoneNumber;
             string password;
+            Console.WriteLine("Autorization");
             do
             {
+                Console.Clear();
                 Console.WriteLine("Phone: ");
                 phoneNumber = Console.ReadLine();
                 Curentuser = userContext.Users.FirstOrDefault(t => t.PhoneUser == phoneNumber);
@@ -86,9 +93,11 @@ namespace ConsoleApp
             Recepient recepientCurent = new Recepient();
             Messager messager = new Messager();
 
+            Console.WriteLine("Please fill this fild : ");
             do
             {
-                Console.WriteLine("Phone: ");
+
+                Console.WriteLine("Phone number of recepient : ");
                 recepientCurent.PhoneRecepient = Console.ReadLine();
 
             } while ((recepientCurent.PhoneRecepient == null) && (recepientCurent.PhoneRecepient != Curentuser.PhoneUser));
@@ -96,25 +105,27 @@ namespace ConsoleApp
             Recepient recepient = userContext.Recepients.FirstOrDefault(t => t.PhoneRecepient == recepientCurent.PhoneRecepient);
             if (recepient == null)
             {
-                Console.Write("Name: ");
+                Console.Write("Topic of message :   ");
                 recepientCurent.Name = Console.ReadLine();
             }
             userContext.Recepients.Add(recepientCurent);
 
 
 
-            Console.WriteLine("Text message:");
+            Console.WriteLine("Text message : ");
             messager.TextMessage = Console.ReadLine();
             messager.RecepientId = recepientCurent.RecepientId;
             messager.UserId = Curentuser.UserId;
             userContext.Messagers.Add(messager);
             userContext.SaveChanges();
+
             Messager[] messageArray = new Messager[1];
             messageArray[0] = messager;
-            SaveInFileJson("Test1", messageArray);
-
+            SaveInFileJson("Message", messageArray);
             Console.WriteLine("Messege are sended.");
             Console.ReadKey();
+            return;
+            
         }
 
         public static void SaveInFileJson<T>(string FileName, T[] data)
@@ -133,12 +144,13 @@ namespace ConsoleApp
 
             do
             {
-                tmp = Cursor("Messagge", "Exit");
+                tmp = Cursor("Messagge", " General interface", "Exit");
 
                 switch (tmp)
                 {
                     case 0: { Messagge(); break; }
-                    case 1: { Console.ReadKey(); break; }
+                    case 1: { Interface(); break; }
+                    case 2: { Environment.Exit(0); break; }
 
                 }
             } while (true);
@@ -157,7 +169,7 @@ namespace ConsoleApp
                 {
                     case 0: { Enroll(); break; }
                     case 1: { Autorization(); break; }
-                    case 2: { Console.ReadKey(); break; }
+                    case 2: { Environment.Exit(0); break; }
 
                 }
             } while (true);
@@ -184,7 +196,7 @@ namespace ConsoleApp
                         Console.WriteLine(menuItems[c]);
                     }
                 }
-                Console.WriteLine("Select your choice with the arrow keys.");
+                Console.WriteLine(" ");
 
                 key = Console.ReadKey(true);
 

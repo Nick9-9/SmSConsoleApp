@@ -30,7 +30,39 @@ namespace ConsoleApp
 
             }
         }
-        public string Password { get; set; }
+        private string password;
+        public string Password
+        {
+            get
+            {
+                return password;
+            }
+            set
+            {
+                
+                //password = value;
+                password = string.Empty;
+                ConsoleKeyInfo key;
+                do
+                {
+                    key = Console.ReadKey(true);
+                    if (key.Key == ConsoleKey.Enter) break;
+                    if (key.Key == ConsoleKey.Backspace)
+                    {
+                        if (password.Length != 0)
+                        {
+                            password = password.Remove(password.Length - 1);
+                            Console.Write("\b \b");
+                        }
+                    }
+                    else
+                    {
+                        password += key.KeyChar;
+                        Console.Write("*");
+                    }
+                } while (key.Key != ConsoleKey.Enter);
+            }
+        }
         public string Name { get; set; }
 
         public ICollection<Messager> Messagers { get; set; }
